@@ -16,17 +16,26 @@ export class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this.loadUserData()
-  };
+    this.loadUserData();
+  }
+
+  componentWillUnmount() {
+    cancelFetch(this.fetchID);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.username !== prevProps.username) {
+      cancelFetch(this.fetchID);
+      this.loadUserData();
+    }
+  }
 
   render() {
     const isLoading = this.state.userData === null ? true : false;
-
     const name = isLoading ? "Loading..." : this.state.userData.name;
     const bio = isLoading ? "I'm a fun type of pet" : this.state.userData.bio;
     const friends = isLoading ? [] : this.state.userData.friends;
     const profilePic = isLoading ? "image" : <img src={this.state.userData.profilePictureUrl} alt="" />;
-
     let className = 'Profile';
     if (isLoading) {
       className += ' loading';
@@ -46,4 +55,4 @@ export class Profile extends React.Component {
     );
   }
   
-}
+};
