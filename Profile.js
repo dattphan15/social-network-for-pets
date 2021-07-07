@@ -22,6 +22,8 @@ export class Profile extends React.Component {
   render() {
     const isLoading = this.state.userData === null ? true : false;
 
+    const name = isLoading ? "Loading..." : this.state.userData.name;
+
     let className = 'Profile';
     if (isLoading) {
       className += ' loading';
@@ -31,7 +33,7 @@ export class Profile extends React.Component {
       <div className={className}>
         <div className="profile-picture"></div>
         <div className="profile-body">
-          <h2>Name goes here</h2>
+          <h2>{name}</h2>
           <h3>@{this.props.username}</h3>
           <p>Bio goes here</p>
           <h3>My friends</h3>
