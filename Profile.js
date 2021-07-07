@@ -23,6 +23,7 @@ export class Profile extends React.Component {
     const isLoading = this.state.userData === null ? true : false;
 
     const name = isLoading ? "Loading..." : this.state.userData.name;
+    const bio = isLoading ? "I'm a fun type of pet" : this.state.userData.bio;
 
     let className = 'Profile';
     if (isLoading) {
@@ -35,7 +36,7 @@ export class Profile extends React.Component {
         <div className="profile-body">
           <h2>{name}</h2>
           <h3>@{this.props.username}</h3>
-          <p>Bio goes here</p>
+          <p>{bio}</p>
           <h3>My friends</h3>
           <Userlist usernames={[]} onChoose={this.props.onChoose} />
         </div>
